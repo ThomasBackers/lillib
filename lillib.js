@@ -12,12 +12,11 @@ export const randomRGBColor = () => {
 
 export const invertRGBColor = color => {
     const splittedColor = color.split(",");
-    const r = splittedColor[0].replace("rgb(", "");
-    const g = splittedColor[1].replace(" ", "");
-    const b = splittedColor[2].replace(" ", "").replace(")", "");
-    const rgb = [parseInt(r), parseInt(g), parseInt(b)];
-    for (let i = 0; i < rgb.length; i++) rgb[i] = (i === 3 ? 1 : 255) - rgb[i];
-    return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+    let r = splittedColor[0].replace("rgb(", ""),
+        g = splittedColor[1].replace(" ", ""),
+        b = splittedColor[2].replace(" ", "").replace(")", "");
+    for (let value of [r, g, b]) value = (i === 3 ? 1 : 255) - rgb[i];
+    return `rgb(${r}, ${g}, ${b})`;
 };
 
 export const shuffleArray = array => {
