@@ -10,7 +10,7 @@ export const randomRGBColor = () => {
     return `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`;
 };
 
-const invertRGBColor = color => {
+export const invertRGBColor = color => {
     const splittedColor = color.split(",");
     // returns ['rgb(r', ' g', ' b)']
     // then we replace useless stuff with a void string
