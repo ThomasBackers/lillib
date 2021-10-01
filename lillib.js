@@ -1,8 +1,8 @@
-export const rand = (min, max) => {
+export const randInt = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min);
 };
 
-export const randInt = (min, max) => {
+export const rand = (min, max) => {
     return Math.random() * (max - min) + min;
 };
 
