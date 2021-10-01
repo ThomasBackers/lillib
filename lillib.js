@@ -7,21 +7,21 @@ export const rand = (min, max) => {
 };
 
 export const randomRGBColor = () => {
-    return `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`;
+    return `rgb(${randInt(0, 256)},${randInt(0, 256)},${randInt(0, 256)})`;
 };
 
 export const invertRGBColor = color => {
     const splittedColor = color.split(",");
     // returns ['rgb(r', ' g', ' b)']
     // then we replace useless stuff with a void string
-    const r = splittedColor[0].replace("rgb(", "");
-    const g = splittedColor[1].replace(" ", ""); 
-    const b = splittedColor[2].replace(" ", "").replace(")", "");
+    const r = splittedColor[0].replace("rgb(", ""),
+        g = splittedColor[1].replace(" ", ""),
+        b = splittedColor[2].replace(" ", "").replace(")", "");
     // we also put them into an array to loop over it easily
     const rgb = [parseInt(r), parseInt(g), parseInt(b)];
     for (let i = 0; i < rgb.length; i++) rgb[i] = (i === 3 ? 1 : 255) - rgb[i];
     return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
-}
+};
 
 export const shuffleArray = array => {
     for (let i = array.length - 1; i > 0; i--) {
