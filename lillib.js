@@ -9,12 +9,7 @@
  * @returns {number} - a random float
  */
 export const rand = (min, max) => {
-    try {
-        if (min > max) throw new RangeError("minimum cannot be higher than maximum");
-    } catch (e) {
-        console.log(`${e.name}: ${e.message}`);
-        return;
-    }
+    if (min > max) throw new RangeError("minimum cannot be higher than maximum");
     return Math.random() * (max - min) + min;
 };
 
@@ -26,11 +21,7 @@ export const rand = (min, max) => {
  * @returns {number} - a random integer
  */
 export const randInt = (min, max) => {
-    try {
-        if (min > max) throw new RangeError("minimum cannot be higher than maximum");
-    } catch (e) {
-        console.log(`${e.name}: ${e.message}`);
-    }
+    if (min > max) throw new RangeError("minimum cannot be higher than maximum");
     return Math.floor(Math.random() * (max - min) + min);
 };
 
@@ -40,7 +31,7 @@ export const randInt = (min, max) => {
 /**
  * Array shuffler:
  * using the Fisher-Yates algorithm,
- * it does not return anything but shuffles directly the array
+ * it does not return anything but shuffles the array directly
  * @param {array} array - any array
  */
 export const shuffle = array => {
@@ -52,27 +43,22 @@ export const shuffle = array => {
     }
 };
 
+/**
+ * 
+ * @param {array} array - any array
+ * @param {number} nb - amount of draws
+ * @returns {*|array} - any for a single draw | the draws array
+ */
 export const randDraw = (array, nb) => {
-    try {
-        nb = parseInt(nb);
-        if (nb < 0) throw new RangeError("the amount of draws cannot be negative");
-    } catch (e) {
-        console.log(`${e.name}: ${e.message}`);
-    }
+    if (nb < 0) throw new RangeError("the amount of draws cannot be negative");
     const draws = [];
     for (let i = 0; i < nb; i++) draws.push(array[randInt(0, array.length)]);
     return nb === 1 ? draws[0] : draws;
 };
 
 export const noRandDraw = (array, nb) => {
-    try {
-        nb = parseInt(nb);
-        if (nb < 0) throw new RangeError("the amount of draws cannot be negative");
-        if (nb > array.length)
-            throw new RangeError("the amout of unique draws cannot exceeds the array length");
-    } catch (e) {
-        console.log(`${e.name}: ${e.message}`);
-    }
+    if (nb < 0) throw new RangeError("the amount of draws cannot be negative");
+    if (nb > array.length) throw new RangeError("the amout of unique draws cannot exceeds the array length");
     const draws = [];
     let draw;
     for (let i = 0; i < nb; i++)
