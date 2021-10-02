@@ -33,6 +33,7 @@ export const randInt = (min, max) => {
  * using the Fisher-Yates algorithm,
  * it returns the shuffled the array
  * @param {array} array - any array
+ * @returns {array} - the shuffled array
  */
 export const shuffle = array => {
     const arrayCopy = [...array];
