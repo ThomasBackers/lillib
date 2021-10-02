@@ -117,13 +117,12 @@ export const invertRGBColor = (color, rgbaMode = false) => {
         const a = splittedColor[3].replace(" ", "").replace(")", "");
         rgb.push(parseInt(r), parseInt(g), parseInt(b), parseFloat(a));
         for (let i = 0; i < 4; i++) rgb[i] = (i === 3 ? 1 : 255) - rgb[i];
+        return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${rgb[3]})`;
     } else {
         const r = splittedColor[0].replace("rgb(", "");
         const b = splittedColor[2].replace(")", "");
         rgb.push(parseInt(r), parseInt(g), parseInt(b));
         for (let i = 0; i < rgb.length; i++) rgb[i] = 255 - rgb[i];
+        return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
     }
-    return rgbaMode
-        ? `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${rgb[3]})`
-        : `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
 };
