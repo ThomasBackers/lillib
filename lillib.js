@@ -80,7 +80,7 @@ export const noRandDraw = (array, n) => {
         throw new RangeError("the amout of unique draws cannot exceeds the array length");
     const arrayCopy = [...array];
     const draws = [];
-    let draw, index;
+    let draw;
     for (let i = 0; i < n; i++) {
         draw = arrayCopy[randInt(0, arrayCopy.length)];
         draws.push(draw);
