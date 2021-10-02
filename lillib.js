@@ -1,13 +1,31 @@
-export const randInt = (min, max) => {
-    return Math.floor(Math.random() * (max - min) + min);
-};
-
 export const rand = (min, max) => {
     return Math.random() * (max - min) + min;
 };
 
+export const randInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min) + min);
+};
+
+export const randDraw = (array, nb) => {
+    const draws = [];
+    for (let i = 0; i < nb; i++) draws.push(array[randInt(0, array.length)]);
+    return draws;
+};
+
+export const noRandDraw = (array, nb) => {
+    //if (nb > array.length) return RangeError("nb cannot be higher than array.length");
+    const draws = [];
+    let draw;
+    for (let i = 0; i < nb; i++)
+        do {
+            draw = array[randInt(0, array.length)];
+        } while (draws.includes(draw));
+        draws.push(draw);
+    return draws;
+};
+
 export const randomRGBColor = () => {
-    return `rgb(${randInt(0, 256)},${randInt(0, 256)},${randInt(0, 256)})`;
+    return `rgb(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)})`;
 };
 
 export const invertRGBColor = color => {
@@ -22,6 +40,7 @@ export const invertRGBColor = color => {
     for (let i = 0; i < rgb.length; i++) rgb[i] = (i === 3 ? 1 : 255) - rgb[i];
     return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
 };
+console.log(invertRGBColor("rgb(0,0,0)"));
 
 export const shuffleArray = array => {
     for (let i = array.length - 1; i > 0; i--) {
