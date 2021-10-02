@@ -31,16 +31,18 @@ export const randInt = (min, max) => {
 /**
  * Array shuffler:
  * using the Fisher-Yates algorithm,
- * it does not return anything but shuffles the array directly
+ * it returns the shuffled the array
  * @param {array} array - any array
  */
 export const shuffle = array => {
-    for (let i = array.length - 1; i > 0; i--) {
+    const arrayCopy = [...array];
+    for (let i = arrayCopy.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        const temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+        const temp = arrayCopy[i];
+        arrayCopy[i] = arrayCopy[j];
+        arrayCopy[j] = temp;
     }
+    return arrayCopy;
 };
 
 /**
