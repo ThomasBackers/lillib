@@ -98,6 +98,11 @@ export const swapNodes = (node1, node2) => {
 //------------------
 // COLORS FUNCTIONS
 //------------------
+/**
+ * Random RGB(a) color code generator
+ * @param {boolean} rgbaMode - optional: false by default  
+ * @returns {string} - rgb(r, g, b) | rgba(r, g, b, a)
+ */
 export const randRGBColor = (rgbaMode = false) => {
     return rgbaMode
         ? `rgba(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)}, ${Math.random().toFixed(
@@ -106,6 +111,12 @@ export const randRGBColor = (rgbaMode = false) => {
         : `rgb(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)})`;
 };
 
+/**
+ * Invert a RGB(a) color code
+ * @param {string} color - rgb(r, g, b) | rgba(r, g, b, a) 
+ * @param {boolean} rgbaMode - optional: false by default
+ * @returns {string} - rgb(r, g, b) | rgba(r, g, b, a)
+ */
 export const invertRGBColor = (color, rgbaMode = false) => {
     const splittedColor = color.split(","); // returns ['rgb(r', ' g', ' b)'] or ['rgba(r', ' g', ' b', ' a)']
     const rgb = [];
