@@ -81,10 +81,10 @@ export const noRandDraw = (array, n) => {
 // NODES FUNCTIONS
 //-----------------
 export const swapNodes = (node1, node2) => {
-    const afterNode2 = node2.nextElementSibling;
-    const parent = node2.parentNode;
+    const afterNode2 = node2.nextSibling;
+    const parentNode2 = node2.parentNode;
     node1.replaceWith(node2);
-    parent.insertBefore(node1, afterNode2);
+    parentNode2.insertBefore(node1, afterNode2);
 };
 
 export const delDuplNodes = parentNode => {
