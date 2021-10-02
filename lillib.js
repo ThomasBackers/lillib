@@ -29,7 +29,8 @@ export const randInt = (min, max) => {
 // ARRAYS FUNCTIONS
 //------------------
 /**
- * Remove a value from an array
+ * Remove a value from an array:
+ * if there are several identical values it removes the first one encountered
  * @param {array} array - any array
  * @param {*} value - any value inside the array
  */
