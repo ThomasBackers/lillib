@@ -40,7 +40,7 @@ export const arrRemove = (array, value) => array.splice(array.indexOf(value), 1)
 /**
  * Array shuffler:
  * using the Fisher-Yates algorithm,
- * it returns the shuffled the array
+ * it returns the shuffled array
  * @param {array} array - any array
  * @returns {array} - the shuffled array
  */
