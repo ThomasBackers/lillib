@@ -80,21 +80,19 @@ export const noRandDraw = (array, n) => {
 //-----------------
 // NODES FUNCTIONS
 //-----------------
+/**
+ * Swap two nodes :
+ * from anywhere in the DOM
+ * @param {object} node1 - first node
+ * @param {object} node2 - second node
+ */
 export const swapNodes = (node1, node2) => {
-    const afterNode2 = node2.nextSibling;
     const parentNode2 = node2.parentNode;
+    if (parentNode2.childNodes[parentNode2.childNodes.length] === node2)
+        parentNode2.appendChild(document.createTextNode("")); // swapNodes absolutely needs node2 to have a nextSibling
+    const afterNode2 = node2.nextSibling;
     node1.replaceWith(node2);
     parentNode2.insertBefore(node1, afterNode2);
-};
-
-export const delDuplNodes = parentNode => {
-    const nodesArray = [];
-    for (let node of parentNode.childNodes) if (node.nodeType === 1) nodesArray.push(node);
-    const seenTextContent = {};
-    for (let node of nodesArray) {
-        if (seenTextContent[node.textContent]) parentNode.removeChild(node);
-        else seenTextContent[node.textContent] = true;
-    }
 };
 
 //------------------
@@ -102,7 +100,9 @@ export const delDuplNodes = parentNode => {
 //------------------
 export const randRGBColor = (rgbaMode = false) => {
     return rgbaMode
-        ? `rgba(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)}, ${Math.random().toFixed(1)})`
+        ? `rgba(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)}, ${Math.random().toFixed(
+              1
+          )})`
         : `rgb(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)})`;
 };
 
