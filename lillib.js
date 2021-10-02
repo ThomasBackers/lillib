@@ -50,7 +50,7 @@ export const shuffle = array => {
  * @returns {*} - any type for a single draw | the draws array
  */
 export const randDraw = (array, n) => {
-    if (n < 1) throw new RangeError("the amount of draws has to be positive");
+    if (n < 1) throw new RangeError("the amount of draws has to be at least equal to 1");
     const draws = [];
     for (let i = 0; i < n; i++) draws.push(array[randInt(0, array.length)]);
     return n === 1 ? draws[0] : draws;
@@ -63,7 +63,7 @@ export const randDraw = (array, n) => {
  * @returns {*} - any type for a single draw | the draws array
  */
 export const noRandDraw = (array, n) => {
-    if (n < 1) throw new RangeError("the amount of draws has to be positive");
+    if (n < 1) throw new RangeError("the amount of draws has to be at least equal to 1");
     if (n > array.length)
         throw new RangeError("the amout of unique draws cannot exceeds the array length");
     const draws = [];
@@ -102,22 +102,28 @@ export const delDuplNodes = parentNode => {
 //------------------
 export const randRGBColor = (rgbaMode = false) => {
     return rgbaMode
-        ? `rgb(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)}, ${rand(0, 1)})`
+        ? `rgba(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)}, ${rand(0, 1)})`
         : `rgb(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)})`;
 };
 
 export const invertRGBColor = (color, rgbaMode = false) => {
-    const splittedColor = color.split(",");
-    // returns ['rgb(r', ' g', ' b)']
+    const splittedColor = color.split(","); // returns ['rgb(r', ' g', ' b)'] or ['rgba(r', ' g', ' b', ' a)']
+    const rgb = []
     // then we replace useless stuff with an empty string
-    const r = splittedColor[0].replace("rgb(", ""),
-        g = splittedColor[1].replace(" ", ""),
-        b = splittedColor[2].replace(" ", "").replace(")", "");
-    const rgb = rgbaMode
-        ? [parseInt(r), parseInt(g), parseInt(b), parseFloat(a)]
-        : [parseInt(r), parseInt(g), parseInt(b)];
-    for (let i = 0; i < rgb.length; i++) rgb[i] = (i === 3 ? 1 : 255) - rgb[i];
+    const g = splittedColor[1].replace(" ", "");
+    if (rgbaMode) {
+        const r = splittedColor[0].replace("rgba(", "");
+        const b = splittedColor[2].replace(" ", "");
+        const a = splittedColor[3].replace(" ", "").replace(")", "");
+        rgb.push(parseInt(r), parseInt(g), parseInt(b), parseFloat(a));
+        for (let i = 0; i < 4; i++) rgb[i] = (i === 3 ? 1 : 255) - rgb[i];
+    } else {
+        const r = splittedColor[0].replace("rgb(", "");
+        const b = splittedColor[2].replace(")", "");
+        rgb.push(parseInt(r), parseInt(g), parseInt(b));
+        for (let i = 0; i < rgb.length; i++) rgb[i] = 255 - rgb[i];
+    }
     return rgbaMode
-        ? `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${rgb[3]})`
+        ? `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${rgb[3]})`
         : `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
 };
