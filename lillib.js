@@ -66,13 +66,14 @@ export const noRandDraw = (array, n) => {
     if (n < 1) throw new RangeError("the amount of draws has to be at least equal to 1");
     if (n > array.length)
         throw new RangeError("the amout of unique draws cannot exceeds the array length");
+    const arrayCopy = [...array];
     const draws = [];
-    let draw;
+    let draw, index;
     for (let i = 0; i < n; i++) {
-        do {
-            draw = array[randInt(0, array.length)];
-        } while (draws.includes(draw));
+        index = randInt(0, arrayCopy.length);
+        draw = arrayCopy[index];
         draws.push(draw);
+        arrayCopy.splice(index, 1);
     }
     return n === 1 ? draws[0] : draws;
 };
