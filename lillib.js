@@ -2,7 +2,7 @@
 // MATHEMATICAL FUNCTIONS
 //------------------------
 /**
- * random float generator:
+ * Random float generator:
  * range [min, max[
  * @param {number} min - minimum value (included)
  * @param {number} max - maximum value (excluded)
@@ -13,12 +13,13 @@ export const rand = (min, max) => {
         if (min > max) throw new RangeError("minimum cannot be higher than maximum");
     } catch (e) {
         console.log(`${e.name}: ${e.message}`);
+        return;
     }
     return Math.random() * (max - min) + min;
 };
 
 /**
- * random integer generator:
+ * Random integer generator:
  * range [min, max[
  * @param {number} min - minimum value (included)
  * @param {number} max - maximum value (excluded)
@@ -26,8 +27,6 @@ export const rand = (min, max) => {
  */
 export const randInt = (min, max) => {
     try {
-        min = parseInt(min);
-        max = parseInt(max);
         if (min > max) throw new RangeError("minimum cannot be higher than maximum");
     } catch (e) {
         console.log(`${e.name}: ${e.message}`);
@@ -38,6 +37,12 @@ export const randInt = (min, max) => {
 //------------------
 // ARRAYS FUNCTIONS
 //------------------
+/**
+ * Array shuffler:
+ * using the Fisher-Yates algorithm,
+ * it does not return anything but shuffles directly the array
+ * @param {array} array - any array
+ */
 export const shuffle = array => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
