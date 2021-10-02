@@ -88,7 +88,7 @@ export const noRandDraw = (array, n) => {
  */
 export const swapNodes = (node1, node2) => {
     const parentNode2 = node2.parentNode;
-    if (parentNode2.childNodes[parentNode2.childNodes.length] === node2)
+    if (parentNode2.childNodes[parentNode2.childNodes.length - 1] === node2)
         parentNode2.appendChild(document.createTextNode("")); // swapNodes absolutely needs node2 to have a nextSibling
     const afterNode2 = node2.nextSibling;
     node1.replaceWith(node2);
