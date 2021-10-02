@@ -44,29 +44,35 @@ export const shuffle = array => {
 };
 
 /**
- * 
+ * n Random draw(s) in a list
  * @param {array} array - any array
- * @param {number} nb - amount of draws
- * @returns {*|array} - any for a single draw | the draws array
+ * @param {number} n - amount of draws
+ * @returns {*} - any type for a single draw | the draws array
  */
-export const randDraw = (array, nb) => {
-    if (nb < 0) throw new RangeError("the amount of draws cannot be negative");
+export const randDraw = (array, n) => {
+    if (n < 1) throw new RangeError("the amount of draws has to be positive");
     const draws = [];
-    for (let i = 0; i < nb; i++) draws.push(array[randInt(0, array.length)]);
-    return nb === 1 ? draws[0] : draws;
+    for (let i = 0; i < n; i++) draws.push(array[randInt(0, array.length)]);
+    return n === 1 ? draws[0] : draws;
 };
 
-export const noRandDraw = (array, nb) => {
-    if (nb < 0) throw new RangeError("the amount of draws cannot be negative");
-    if (nb > array.length) throw new RangeError("the amout of unique draws cannot exceeds the array length");
+/**
+ * n Random draw(s) without remittance in a list
+ * @param {array} array - any array 
+ * @param {number} n - amount of draws
+ * @returns {*} - any type for a single draw | the draws array
+ */
+export const noRandDraw = (array, n) => {
+    if (n < 1) throw new RangeError("the amount of draws has to be positive");
+    if (n > array.length) throw new RangeError("the amout of unique draws cannot exceeds the array length");
     const draws = [];
     let draw;
-    for (let i = 0; i < nb; i++)
+    for (let i = 0; i < n; i++)
         do {
             draw = array[randInt(0, array.length)];
         } while (draws.includes(draw));
     draws.push(draw);
-    return nb === 1 ? draws[0] : draws;
+    return n === 1 ? draws[0] : draws;
 };
 
 //-----------------
