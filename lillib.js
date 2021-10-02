@@ -109,8 +109,7 @@ export const invertRGBColor = color => {
     const r = splittedColor[0].replace("rgb(", ""),
         g = splittedColor[1].replace(" ", ""),
         b = splittedColor[2].replace(" ", "").replace(")", "");
-    // we also put them into an array to loop over it easily
     const rgb = [parseInt(r), parseInt(g), parseInt(b)];
-    for (let i = 0; i < 3; i++) rgb[i] = (i === 3 ? 1 : 255) - rgb[i];
+    for (let i = 0; i < 3; i++) rgb[i] = 255 - rgb[i];
     return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
 };
