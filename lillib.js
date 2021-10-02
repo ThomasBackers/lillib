@@ -93,7 +93,7 @@ export const noRandDraw = (array, n) => {
 // NODES FUNCTIONS
 //-----------------
 /**
- * Swap two nodes :
+ * Swap two nodes:
  * from anywhere in the DOM
  * @param {object} node1 - first node
  * @param {object} node2 - second node
