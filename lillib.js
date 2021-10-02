@@ -81,10 +81,9 @@ export const noRandDraw = (array, n) => {
     const draws = [];
     let draw, index;
     for (let i = 0; i < n; i++) {
-        index = randInt(0, arrayCopy.length);
-        draw = arrayCopy[index];
+        draw = arrayCopy[randInt(0, arrayCopy.length)];
         draws.push(draw);
-        arrayCopy.splice(index, 1);
+        arrRemove(arrayCopy, draw);
     }
     return n === 1 ? draws[0] : draws;
 };
