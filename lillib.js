@@ -102,13 +102,13 @@ export const delDuplNodes = parentNode => {
 //------------------
 export const randRGBColor = (rgbaMode = false) => {
     return rgbaMode
-        ? `rgba(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)}, ${rand(0, 1)})`
+        ? `rgba(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)}, ${Math.random().toFixed(1)})`
         : `rgb(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)})`;
 };
 
 export const invertRGBColor = (color, rgbaMode = false) => {
     const splittedColor = color.split(","); // returns ['rgb(r', ' g', ' b)'] or ['rgba(r', ' g', ' b', ' a)']
-    const rgb = []
+    const rgb = [];
     // then we replace useless stuff with an empty string
     const g = splittedColor[1].replace(" ", "");
     if (rgbaMode) {
