@@ -67,11 +67,12 @@ export const noRandDraw = (array, n) => {
     if (n > array.length) throw new RangeError("the amout of unique draws cannot exceeds the array length");
     const draws = [];
     let draw;
-    for (let i = 0; i < n; i++)
+    for (let i = 0; i < n; i++) {
         do {
             draw = array[randInt(0, array.length)];
         } while (draws.includes(draw));
-    draws.push(draw);
+        draws.push(draw);
+    }
     return n === 1 ? draws[0] : draws;
 };
 
