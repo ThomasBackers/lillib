@@ -109,7 +109,6 @@ export const randRGBColor = (rgbaMode = false) => {
 export const invertRGBColor = (color, rgbaMode = false) => {
     const splittedColor = color.split(","); // returns ['rgb(r', ' g', ' b)'] or ['rgba(r', ' g', ' b', ' a)']
     const rgb = [];
-    // then we replace useless stuff with an empty string
     const g = splittedColor[1].replace(" ", "");
     if (rgbaMode) {
         const r = splittedColor[0].replace("rgba(", "");
