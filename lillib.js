@@ -58,13 +58,14 @@ export const randDraw = (array, n) => {
 
 /**
  * n Random draw(s) without remittance in a list
- * @param {array} array - any array 
+ * @param {array} array - any array
  * @param {number} n - amount of draws
  * @returns {*} - any type for a single draw | the draws array
  */
 export const noRandDraw = (array, n) => {
     if (n < 1) throw new RangeError("the amount of draws has to be positive");
-    if (n > array.length) throw new RangeError("the amout of unique draws cannot exceeds the array length");
+    if (n > array.length)
+        throw new RangeError("the amout of unique draws cannot exceeds the array length");
     const draws = [];
     let draw;
     for (let i = 0; i < n; i++) {
@@ -99,18 +100,24 @@ export const delDuplNodes = parentNode => {
 //------------------
 // COLORS FUNCTIONS
 //------------------
-export const randRGBColor = () => {
-    return `rgb(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)})`;
+export const randRGBColor = (rgbaMode = false) => {
+    return rgbaMode
+        ? `rgb(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)}, ${rand(0, 1)})`
+        : `rgb(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)})`;
 };
 
-export const invertRGBColor = color => {
+export const invertRGBColor = (color, rgbaMode = false) => {
     const splittedColor = color.split(",");
     // returns ['rgb(r', ' g', ' b)']
     // then we replace useless stuff with an empty string
     const r = splittedColor[0].replace("rgb(", ""),
         g = splittedColor[1].replace(" ", ""),
         b = splittedColor[2].replace(" ", "").replace(")", "");
-    const rgb = [parseInt(r), parseInt(g), parseInt(b)];
-    for (let i = 0; i < 3; i++) rgb[i] = 255 - rgb[i];
-    return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+    const rgb = rgbaMode
+        ? [parseInt(r), parseInt(g), parseInt(b), parseFloat(a)]
+        : [parseInt(r), parseInt(g), parseInt(b)];
+    for (let i = 0; i < rgb.length; i++) rgb[i] = (i === 3 ? 1 : 255) - rgb[i];
+    return rgbaMode
+        ? `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${rgb[3]})`
+        : `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
 };
