@@ -32,7 +32,7 @@ export const randInt = (min, max) => {
 /**
  * Remove a value from an array
  * @param {array} array - any array
- * @param {*} value - any value of the array
+ * @param {*} value - any value inside the array
  */
 // wonder why it's still not a native array method xD
 export const arrRemove = (array, value) => array.splice(array.indexOf(value), 1);
