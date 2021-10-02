@@ -28,6 +28,14 @@ export const randInt = (min, max) => {
 //------------------
 // ARRAYS FUNCTIONS
 //------------------
+
+/**
+ * Remove a value from an array
+ * @param {array} array - any array
+ * @param {*} value - anything
+ */
+export const arrRemove = (array, value) => array.splice(array.indexOf(value), 1);
+
 /**
  * Array shuffler:
  * using the Fisher-Yates algorithm,
@@ -35,7 +43,7 @@ export const randInt = (min, max) => {
  * @param {array} array - any array
  * @returns {array} - the shuffled array
  */
-export const shuffle = array => {
+export const shuffleArr = array => {
     const arrayCopy = [...array];
     for (let i = arrayCopy.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -104,7 +112,7 @@ export const swapNodes = (node1, node2) => {
 //------------------
 /**
  * Random RGB(a) color code generator
- * @param {boolean} rgbaMode - optional: false by default  
+ * @param {boolean} rgbaMode - optional: false by default
  * @returns {string} - rgb(r, g, b) | rgba(r, g, b, a)
  */
 export const randRGBColor = (rgbaMode = false) => {
@@ -117,7 +125,7 @@ export const randRGBColor = (rgbaMode = false) => {
 
 /**
  * Invert a RGB(a) color code
- * @param {string} color - rgb(r, g, b) | rgba(r, g, b, a) 
+ * @param {string} color - rgb(r, g, b) | rgba(r, g, b, a)
  * @param {boolean} rgbaMode - optional: false by default
  * @returns {string} - rgb(r, g, b) | rgba(r, g, b, a)
  */
