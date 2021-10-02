@@ -117,9 +117,7 @@ export const swapNodes = (node1, node2) => {
  */
 export const randRGBColor = (rgbaMode = false) => {
     return rgbaMode
-        ? `rgba(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)}, ${Math.random().toFixed(
-              1
-          )})`
+        ? `rgba(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)}, ${Math.random().toFixed(1)})`
         : `rgb(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)})`;
 };
 
