@@ -1,11 +1,37 @@
 //------------------------
 // MATHEMATICAL FUNCTIONS
 //------------------------
+/**
+ * random float generator:
+ * range [min, max[
+ * @param {number} min - minimum value (included)
+ * @param {number} max - maximum value (excluded)
+ * @returns {number} - a random float
+ */
 export const rand = (min, max) => {
+    try {
+        if (min > max) throw new RangeError("minimum cannot be higher than maximum");
+    } catch (e) {
+        console.log(`${e.name}: ${e.message}`);
+    }
     return Math.random() * (max - min) + min;
 };
 
+/**
+ * random integer generator:
+ * range [min, max[
+ * @param {number} min - minimum value (included)
+ * @param {number} max - maximum value (excluded)
+ * @returns {number} - a random integer
+ */
 export const randInt = (min, max) => {
+    try {
+        min = parseInt(min);
+        max = parseInt(max);
+        if (min > max) throw new RangeError("minimum cannot be higher than maximum");
+    } catch (e) {
+        console.log(`${e.name}: ${e.message}`);
+    }
     return Math.floor(Math.random() * (max - min) + min);
 };
 
@@ -22,14 +48,26 @@ export const shuffle = array => {
 };
 
 export const randDraw = (array, nb) => {
+    try {
+        nb = parseInt(nb);
+        if (nb < 0) throw new RangeError("the amount of draws cannot be negative");
+    } catch (e) {
+        console.log(`${e.name}: ${e.message}`);
+    }
     const draws = [];
     for (let i = 0; i < nb; i++) draws.push(array[randInt(0, array.length)]);
     return nb === 1 ? draws[0] : draws;
 };
 
 export const noRandDraw = (array, nb) => {
-    if (nb > array.length)
-        throw new RangeError("amout of unique draws (nb) cannot exceed the array length");
+    try {
+        nb = parseInt(nb);
+        if (nb < 0) throw new RangeError("the amount of draws cannot be negative");
+        if (nb > array.length)
+            throw new RangeError("the amout of unique draws cannot exceeds the array length");
+    } catch (e) {
+        console.log(`${e.name}: ${e.message}`);
+    }
     const draws = [];
     let draw;
     for (let i = 0; i < nb; i++)
