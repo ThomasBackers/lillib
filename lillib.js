@@ -34,7 +34,7 @@ export const randInt = (min, max) => {
  * @param {array} array - any array
  * @param {*} value - any value inside the array
  */
-// wonder why it's still not a native array method xD
+// wonder why there is still not a similar native array method (?)
 export const arrRemove = (array, value) => array.splice(array.indexOf(value), 1);
 
 /**
@@ -110,12 +110,19 @@ export const swapNodes = (node1, node2) => {
 //------------------
 // COLORS FUNCTIONS
 //------------------
+export const rgbToHex = () => {};
+export const rgbToHsl = () => {};
+export const hexToRgb = () => {};
+export const hexToHsl = () => {};
+export const hslToRgb = () => {};
+export const hslToHex = () => {};
+
 /**
  * Random RGB(a) color code generator
  * @param {boolean} rgbaMode - optional: false by default
  * @returns {string} - rgb(r, g, b) | rgba(r, g, b, a)
  */
-export const randRGBColor = (rgbaMode = false) => {
+export const randRgb = (rgbaMode = false) => {
     return rgbaMode
         ? `rgba(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)}, ${Math.random().toFixed(1)})`
         : `rgb(${randInt(0, 256)}, ${randInt(0, 256)}, ${randInt(0, 256)})`;
@@ -127,7 +134,7 @@ export const randRGBColor = (rgbaMode = false) => {
  * @param {boolean} rgbaMode - optional: false by default
  * @returns {string} - rgb(r, g, b) | rgba(r, g, b, a)
  */
-export const invertRGBColor = (color, rgbaMode = false) => {
+export const invertRgb = (color, rgbaMode = false) => {
     const splittedColor = color.split(","); // returns ['rgb(r', ' g', ' b)'] or ['rgba(r', ' g', ' b', ' a)']
     const rgb = [];
     const g = splittedColor[1].replace(" ", "");
@@ -142,7 +149,7 @@ export const invertRGBColor = (color, rgbaMode = false) => {
         const r = splittedColor[0].replace("rgb(", "");
         const b = splittedColor[2].replace(")", "");
         rgb.push(parseInt(r), parseInt(g), parseInt(b));
-        for (let i = 0; i < rgb.length; i++) rgb[i] = 255 - rgb[i];
+        for (let i = 0; i < 3; i++) rgb[i] = 255 - rgb[i];
         return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
     }
 };
