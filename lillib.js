@@ -102,7 +102,7 @@ export const noRandDraw = (array, n) => {
 export const swapNodes = (node1, node2) => {
     const parentNode2 = node2.parentNode;
     if (parentNode2.childNodes[parentNode2.childNodes.length - 1] === node2)
-    // swapNodes absolutely needs node2 to have a nextSibling
+        // swapNodes absolutely needs node2 to have a nextSibling
         parentNode2.appendChild(document.createTextNode(""));
     const afterNode2 = node2.nextSibling;
     node1.replaceWith(node2);
@@ -113,7 +113,7 @@ export const swapNodes = (node1, node2) => {
 // COLORS FUNCTIONS
 //------------------
 /**
- * Transform a RGB(a) color code into an array of numbers:
+ * Transforms a RGB(a) color code into an array of numbers:
  * @param {string} color - rgb(r, g, b) | rgba(r, g, b, a)
  * @param {boolean} rgbaMode - optional: false by default
  * @returns {array<number>} - [r, g, b] | [r, g, b, a]
@@ -121,43 +121,73 @@ export const swapNodes = (node1, node2) => {
 export const splitRgb = (color, rgbaMode = false) => {
     // first line returns ['rgb(r', ' g', ' b)'] or ['rgba(r', ' g', ' b', ' a)']
     const splittedColor = color.split(",");
-    const rgb = [];
+    const rgbArray = [];
     const g = splittedColor[1].replace(" ", "");
     if (rgbaMode) {
         const r = splittedColor[0].replace("rgba(", "");
         const b = splittedColor[2].replace(" ", "");
         const a = splittedColor[3].replace(" ", "").replace(")", "");
-        rgb.push(parseInt(r), parseInt(g), parseInt(b), parseFloat(a));
+        rgbArray.push(parseInt(r), parseInt(g), parseInt(b), parseFloat(a));
     } else {
         const r = splittedColor[0].replace("rgb(", "");
         const b = splittedColor[2].replace(")", "");
-        rgb.push(parseInt(r), parseInt(g), parseInt(b));
+        rgbArray.push(parseInt(r), parseInt(g), parseInt(b));
     }
-    return rgb;
+    return rgbArray;
 };
 
 /**
- * 
- * @param {*} color 
- * @param {*} rgbaMode 
- * @returns 
+ * Converts a RGB(a) color code into a hexadecimal one
+ * @param {string} color - rgb(r, g, b) | rgba(r, g, b, a)
+ * @param {boolean} rgbaMode - optional: false by default
+ * @returns {string} - #rrggbb | #rrggbbaa
  */
 export const rgbToHex = (color, rgbaMode = false) => {
-    const rgb = splitRgb(color, rgbaMode);
-    const hex = [];
-    for (let i = 0; i < rgb.length; i++) {
-        if (i === 3) hex.push(rgb[i]*100);
-        else rgb[i].toString(16).length === 1 ? "0" + rgb[i].toString(16) : rgb[i].toString(16);
+    const rgbArray = splitRgb(color, rgbaMode);
+    const hexArray = [];
+    for (let i = 0; i < rgbArray.length; i++) {
+        if (i === 3) hexArray.push(Math.round(rgbArray[i] * 100));
+        else
+            rgbArray[i].toString(16).length === 1
+                ? hexArray.push("0" + rgbArray[i].toString(16))
+                : hexArray.push(rgbArray[i].toString(16));
     }
-    let hexValue = "#";
-    for (let value of hex) hexValue += value;
-    return hexValue;
+    let hex = "#";
+    for (let hexValue of hexArray) hex += hexValue;
+    return hex;
 };
 
 export const rgbToHsl = () => {};
-export const hexToRgb = () => {};
+
+/**
+ * Converts a hexadecimal(a) color code into a rgb one
+ * @param {string} color - #rrggbb | #rrggbbaa
+ * @param {boolean} alphaMode - optional: false by default
+ * @returns {string} - rgb(r, g, b) | rgba(r, g, b, a)
+ */
+export const hexToRgb = (color, alphaMode = false) => {
+    //yourNumber = parseInt(hexString, 16);
+    let rgbValue = alphaMode ? "rgba(" : "rgb(";
+    let currentValue = "";
+    for (let i = 1; i < color.length; i++) {
+        currentValue += color[i];
+        if (i % 2 === 0) {
+            i !== 8
+                ? (rgbValue += parseInt(currentValue, 16))
+                : (rgbValue += parseInt(currentValue) / 100);
+            if (i !== color.length - 1) {
+                rgbValue += ", ";
+                currentValue = "";
+            } else rgbValue += ")";
+        }
+    }
+    return rgbValue;
+};
+
 export const hexToHsl = () => {};
+
 export const hslToRgb = () => {};
+
 export const hslToHex = () => {};
 
 /**
@@ -179,11 +209,8 @@ export const randRgb = (rgbaMode = false) => {
  */
 export const invertRgb = (color, rgbaMode = false) => {
     // first line returns an array of numbers containing RGB(a) values
-    const rgb = splitRgb(color, rgbaMode);
-    for (let i = 0; i < rgb.length; i++) rgb[i] = (i === 3 ? 1 : 255) - rgb[i];
-    if (rgbaMode) { 
-        return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${rgb[3]})`;
-    } else {
-        return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
-    }
+    const rgbArray = splitRgb(color, rgbaMode);
+    for (let i = 0; i < rgbArray.length; i++) rgbArray[i] = (i === 3 ? 1 : 255) - rgbArray[i];
+    if (rgbaMode) return `rgba(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]}, ${rgbArray[3]})`;
+    else return `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`;
 };
