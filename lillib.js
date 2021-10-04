@@ -31,12 +31,16 @@ export const randInt = (min, max) => {
 //------------------
 /**
  * Remove a value from an array:
- * if there are several identical values it removes the first one encountered
+ * if there are several identical values and 
+ * your specify that kind of value a single
+ * time it will remove the first one encountered
  * @param {array} array - any array
- * @param {*} value - any value inside the array
+ * @param {...*} values - the values you want to remove
  */
 // wonder why there is still not a similar native array method (?)
-export const arrRemove = (array, value) => array.splice(array.indexOf(value), 1);
+export const arrRemove = (array, ...values) => {
+    for (let i = 0; i < values.length; i++) array.splice(i, 1);
+};
 
 /**
  * Array shuffler:
@@ -166,7 +170,6 @@ export const rgbToHsl = () => {};
  * @returns {string} - rgb(r, g, b) | rgba(r, g, b, a)
  */
 export const hexToRgb = (color, alphaMode = false) => {
-    //yourNumber = parseInt(hexString, 16);
     let rgbValue = alphaMode ? "rgba(" : "rgb(";
     let currentValue = "";
     for (let i = 1; i < color.length; i++) {
